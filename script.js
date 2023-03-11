@@ -4,7 +4,7 @@ const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 
-async function getUser(username){
+async function getUser(username) {
     const resp = await fetch(APIURL + username);
     const respData = await resp.json();
 
@@ -14,15 +14,15 @@ async function getUser(username){
 }
 
 
-async function getRepos(username){
-    const resp= await fetch(APIURL + username + '/repos');
+async function getRepos(username) {
+    const resp = await fetch(APIURL + username + '/repos');
     const respData = await resp.json();
 
     addReposToCart(respData);
 }
 
 
-function createUserCard(user){
+function createUserCard(user) {
     const cardHTML = `
     <div class='card'>
         <div>
@@ -44,10 +44,10 @@ function createUserCard(user){
     main.innerHTML = cardHTML;
 }
 
-function addReposToCart(repos){
+function addReposToCart(repos) {
     const reposEl = document.getElementById('repos');
-    repos.sort((a,b) => {
-        b.stargazers_count-a.stargazers_count
+    repos.sort((a, b) => {
+        b.stargazers_count - a.stargazers_count
     }).forEach(repo => {
         const repoEl = document.createElement('a');
         repoEl.classList.add('repo');
@@ -60,12 +60,12 @@ function addReposToCart(repos){
     })
 }
 
-form.addEventListener('submit', (e) =>{
+form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const user = search.value;
 
-    if(user){
+    if (user) {
         getUser(user);
         search.value = '';
     }
